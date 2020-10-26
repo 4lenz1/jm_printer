@@ -55,6 +55,7 @@ function callback_createDevice(deviceObj, errorCode) {
 
 
 function createData() {
+    console.log('create print data');
     printer.addTextAlign(printer.ALIGN_CENTER);
     printer.addText('JM-PLUS\n');
     printer.addText('JM-PLUS\n');
