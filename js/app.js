@@ -17,7 +17,7 @@ function connect() {
 function callback_connect(resultConnect) {
     console.log('callback_connect called');
     var deviceId = 'local_printer';
-    var options = { 'crypto': false, 'buffer': false };
+    var options = { 'crypto': true, 'buffer': true };
     if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
         //Retrieves the Printer object
         ePosDev.createDevice(deviceId, ePosDev.DEVICE_TYPE_PRINTER, options,
@@ -41,8 +41,9 @@ function callback_createDevice(deviceObj, errorCode) {
     printer = deviceObj;
     console.log('printer', printer);
     //Registers the print complete event
+    send();
     printer.onreceive = function (response) {
-        send();
+
 
         if (response.success) {
             console.log('response.success', response);
