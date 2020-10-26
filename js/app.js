@@ -58,7 +58,7 @@ function callback_createDevice(deviceObj, errorCode) {
     printer.oncoveropen = function () { //alert('coveropen');
         console.log("Printer Cover Open");
     };
-    printer.send();
+
 }
 
 
