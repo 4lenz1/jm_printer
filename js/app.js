@@ -22,15 +22,19 @@ function callback_connect(resultConnect) {
         //Retrieves the Printer object
         ePosDev.createDevice(deviceId, ePosDev.DEVICE_TYPE_PRINTER, options,
             callback_createDevice);
+            createData();
     }
     else {
         //Displays error messages
+        console.log('callback_connect error');
     }
 }
 
 var printer = null;
 function callback_createDevice(deviceObj, errorCode) {
+    console.log('callback_createDevice called');
     if (deviceObj === null) {
+        console.log('deviceObj is null , error', errorCode);
         //Displays an error message if the system fails to retrieve the Printer object
         return;
     }
@@ -38,9 +42,11 @@ function callback_createDevice(deviceObj, errorCode) {
     //Registers the print complete event
     printer.onreceive = function (response) {
         if (response.success) {
+            console.log('print success');
             //Displays the successful print message
         }
         else {
+            console.log('error on   printer.onreceive ');
             //Displays error messages
         }
     };
@@ -50,6 +56,15 @@ function callback_createDevice(deviceObj, errorCode) {
 function createData() {
     printer.addTextAlign(printer.ALIGN_CENTER);
     printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+
+    printer.addText('JM-PLUS\n');
+
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+
 }
 
 function send() {
