@@ -76,6 +76,8 @@ function send() {
 //Discards the Printer object
 ePosDev.deleteDevice(printer, callback_deleteDevice);
 function callback_deleteDevice(errorCode) {
+    console.log('callback_deleteDevice called');
     //Terminates connection with device
     ePosDev.disconnect();
+    console.log('disconnect with invoice printer');
 }
