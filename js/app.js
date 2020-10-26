@@ -39,20 +39,22 @@ function callback_createDevice(deviceObj, errorCode) {
         return;
     }
     printer = deviceObj;
+    printer.timeout = 60000;
     console.log('printer', printer);
     //Registers the print complete event
-    send();
+
     printer.onreceive = function (response) {
-
-
         if (response.success) {
             console.log('response.success', response);
-            //Displays the successful print message
+            console.log("Printer Object Created");//Displays the successful print message
         }
         else {
             console.log('error on   printer.onreceive ');
             //Displays error messages
         }
+    };
+    printer.oncoveropen = function () { //alert('coveropen');
+        console.log("Printer Cover Open");  
     };
 }
 
