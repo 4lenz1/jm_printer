@@ -17,7 +17,7 @@ function connect() {
 function callback_connect(resultConnect) {
     console.log('callback_connect called');
     var deviceId = 'local_printer';
-    var options = { 'crypto': true, 'buffer': true };
+    var options = { 'crypto': false, 'buffer': false };
     if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
         //Retrieves the Printer object
         ePosDev.createDevice(deviceId, ePosDev.DEVICE_TYPE_PRINTER, options,
@@ -39,7 +39,7 @@ function callback_createDevice(deviceObj, errorCode) {
         return;
     }
     printer = deviceObj;
-    printer.timeout = 60000;
+    printer.timeout = 30000;
     console.log('printer', printer);
     //Registers the print complete event
 
@@ -47,6 +47,8 @@ function callback_createDevice(deviceObj, errorCode) {
         if (response.success) {
             console.log('response.success', response);
             console.log("Printer Object Created");//Displays the successful print message
+            send();
+
         }
         else {
             console.log('error on   printer.onreceive ');
@@ -54,7 +56,7 @@ function callback_createDevice(deviceObj, errorCode) {
         }
     };
     printer.oncoveropen = function () { //alert('coveropen');
-        console.log("Printer Cover Open");  
+        console.log("Printer Cover Open");
     };
 }
 
