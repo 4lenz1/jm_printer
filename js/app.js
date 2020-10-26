@@ -39,13 +39,14 @@ function callback_createDevice(deviceObj, errorCode) {
         return;
     }
     printer = deviceObj;
-    console.log('printer' , printer);
+    console.log('printer' , );
     //Registers the print complete event
     printer.onreceive = function (response) {
+        send();
+
         if (response.success) {
             console.log('response.success', response);
             //Displays the successful print message
-            send();
         }
         else {
             console.log('error on   printer.onreceive ');
