@@ -2,17 +2,20 @@ const ePosDev = new epson.ePOSDevice();
 
 window.addEventListener('DOMContentLoaded', () => {
     console.log('html loaded');
+    connect();
 
 });
 
 
 function connect() {
+    console.log('connect called');
     var ipAddress = '192.168.2.158';
     var port = '8043';
     ePosDev.connect(ipAddress, port, callback_connect);
 }
 
 function callback_connect(resultConnect) {
+    console.log('callback_connect called');
     var deviceId = 'local_printer';
     var options = { 'crypto': false, 'buffer': false };
     if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
@@ -46,7 +49,7 @@ function callback_createDevice(deviceObj, errorCode) {
 
 function createData() {
     printer.addTextAlign(printer.ALIGN_CENTER);
-    printer.addText('Hello World\n');
+    printer.addText('JM-PLUS\n');
 }
 
 function send() {
