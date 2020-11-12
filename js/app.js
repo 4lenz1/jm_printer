@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function connect() {
     console.log('connect called');
-    var ipAddress = '192.168.2.158';
+    var ipAddress = '192.168.0.161';
     var port = '8043';
     ePosDev.connect(ipAddress, port, callback_connect);
 }
