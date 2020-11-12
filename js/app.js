@@ -2,7 +2,28 @@ const ePosDev = new epson.ePOSDevice();
 
 window.addEventListener('DOMContentLoaded', () => {
     console.log('html loaded');
-    connect();
+    // connect();
+    createBtn();
+});
+
+const root = document.getElementById('root');
+
+function createBtn() {
+ let btn = document.createElement('button');
+ btn.id = 'connect';
+ btn.innerText = 'connect printer'; 
+ 
+root.appendChild(btn);
+}
+
+
+
+document.addEventListener('click' , (e) => {
+
+    if(e.target.id === 'connect'){
+        console.log('btn clicked' , e.target.id );
+        connect();
+    }
 
 });
 
