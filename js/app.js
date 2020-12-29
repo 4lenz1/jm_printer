@@ -14,6 +14,7 @@ function createBtn() {
     btn.id = 'connect';
     btn.innerText = 'connect printer';
 
+
     root.appendChild(btn);
 }
 
@@ -34,6 +35,7 @@ function connect() {
     if (ip.trim().length === 0) {
         alert('請輸入 ip');
     } else {
+        status.textContent = '連線中.....';
         var ipAddress = ip;
         var port = '8043';
         ePosDev.connect(ipAddress, port, callback_connect);
@@ -46,7 +48,7 @@ function connect() {
 async function callback_connect(resultConnect) {
     console.log('callback_connect called');
     var deviceId = 'local_printer';
-    var options = { 'crypto': true, 'buffer': true };
+    var options = { 'crypto': false, 'buffer': false };
     if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
         console.log('connected');
         status.textContent = '已連接到印表機';
