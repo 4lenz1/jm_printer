@@ -63,15 +63,16 @@ function callback_createDevice(deviceObj, errorCode) {
     }
     printer = deviceObj;
     console.log('print obj', deviceObj);
-    createData();
-    send();
+    createData(()=>{
+        send();
+    });
     //Registers the print complete event
     printer.onreceive = function (response) {
         if (response.success) {
 
             //Displays the successful print message
-            
-           
+
+
             console.log('print success');
         }
         else {
@@ -82,7 +83,7 @@ function callback_createDevice(deviceObj, errorCode) {
 }
 
 
-function createData() {
+function createData(callback) {
     console.log('create print data');
     printer.addTextAlign(printer.ALIGN_CENTER);
     printer.addText('JM-PLUS\n');
@@ -94,7 +95,7 @@ function createData() {
     printer.addText('JM-PLUS\n');
     printer.addText('JM-PLUS\n');
     printer.addText('Small GG\n');
-
+    callback();
 }
 
 function send() {
