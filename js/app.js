@@ -1,8 +1,9 @@
 const ePosDev = new epson.ePOSDevice();
-
+const status = document.getElementById('status');
 window.addEventListener('DOMContentLoaded', () => {
     console.log('html loaded');
     // connect();
+    document.getElementById('ip').value = '192.168.0.161';
     createBtn();
 });
 
@@ -29,10 +30,15 @@ window.addEventListener('click', (e) => {
 
 
 function connect() {
-    console.log('connect called');
-    var ipAddress = '192.168.0.161';
-    var port = '8043';
-    ePosDev.connect(ipAddress, port, callback_connect);
+    let ip = document.getElementById('ip').value;
+    if (ip.trim().length === 0) {
+        alert('請輸入 ip');
+    } else {
+        var ipAddress = ip;
+        var port = '8043';
+        ePosDev.connect(ipAddress, port, callback_connect);
+    }
+
 
 
 }
@@ -43,12 +49,14 @@ async function callback_connect(resultConnect) {
     var options = { 'crypto': true, 'buffer': true };
     if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
         console.log('connected');
+        status.textContent = '已連接到印表機';
         //Retrieves the Printer object
         ePosDev.createDevice(deviceId, ePosDev.DEVICE_TYPE_PRINTER, options,
             callback_createDevice);
     }
     else {
         //Displays error messages
+        status.textContent = '無法連接到印表機';
         console.log('callback_connect error');
     }
 }
@@ -73,9 +81,13 @@ function callback_createDevice(deviceObj, errorCode) {
         if (response.success) {
             //Displays the successful print message
             console.log('print success');
+            status.textContent = '已出單';
+
         }
         else {
             console.error('print not scuuess');
+            status.textContent = '列印失敗';
+
             //Displays error messages
         }
     };
@@ -130,9 +142,13 @@ function createData(callback) {
 function send() {
     console.log('send called');
     if (ePosDev.isConnected) {
+        status.textContent = '列印中.......';
+
         console.log('ePosDev.isConnected , now printing');
         printer.send();
     } else {
+        status.textContent = '無法列印，請重新連接';
+
         console.warn('ePosDev.is not connected');
     }
 }
