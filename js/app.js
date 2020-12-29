@@ -9,19 +9,19 @@ window.addEventListener('DOMContentLoaded', () => {
 const root = document.getElementById('root');
 
 function createBtn() {
- let btn = document.createElement('button');
- btn.id = 'connect';
- btn.innerText = 'connect printer'; 
- 
-root.appendChild(btn);
+    let btn = document.createElement('button');
+    btn.id = 'connect';
+    btn.innerText = 'connect printer';
+
+    root.appendChild(btn);
 }
 
 
 
-document.addEventListener('click' , (e) => {
+window.addEventListener('click', (e) => {
 
-    if(e.target.id === 'connect'){
-        console.log('btn clicked' , e.target.id );
+    if (e.target.id === 'connect') {
+        console.log('btn clicked', e.target.id);
         connect();
     }
 
@@ -40,10 +40,10 @@ function callback_connect(resultConnect) {
     var deviceId = 'local_printer';
     var options = { 'crypto': false, 'buffer': false };
     if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
+        console.log('connected');
         //Retrieves the Printer object
         ePosDev.createDevice(deviceId, ePosDev.DEVICE_TYPE_PRINTER, options,
             callback_createDevice);
-        createData();
     }
     else {
         //Displays error messages
@@ -53,33 +53,24 @@ function callback_connect(resultConnect) {
 
 var printer = null;
 function callback_createDevice(deviceObj, errorCode) {
-    console.log('callback_createDevice called');
     if (deviceObj === null) {
-        console.log('deviceObj is null , error', errorCode);
+        console.log(errorCode);
+        console.log('deviceObj is null , failed ' , errorCode);
         //Displays an error message if the system fails to retrieve the Printer object
         return;
     }
     printer = deviceObj;
-    printer.timeout = 30000;
-    console.log('printer', printer);
     //Registers the print complete event
-
     printer.onreceive = function (response) {
         if (response.success) {
-            console.log('response.success', response);
-            console.log("Printer Object Created");//Displays the successful print message
-            send();
-
+            //Displays the successful print message
+            console.log('print success');
         }
         else {
-            console.log('error on   printer.onreceive ');
+            console.error('error');
             //Displays error messages
         }
     };
-    printer.oncoveropen = function () { //alert('coveropen');
-        console.log("Printer Cover Open");
-    };
-
 }
 
 
