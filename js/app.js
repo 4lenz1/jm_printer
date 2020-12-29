@@ -62,6 +62,8 @@ function callback_createDevice(deviceObj, errorCode) {
         return;
     }
     printer = deviceObj;
+    printer.addCut(printer.CUT_FEED);
+
     console.log('print obj', deviceObj);
     createData(() => {
         send();
@@ -81,6 +83,7 @@ function callback_createDevice(deviceObj, errorCode) {
 
 
 function createData(callback) {
+    printer.addTextLang('zh-tw');
     console.log('create print data');
     printer.addTextAlign(printer.ALIGN_CENTER);
     printer.addText('JM-PLUS\n');
@@ -88,24 +91,39 @@ function createData(callback) {
 
     printer.addText('JM-PLUS\n');
     printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('JM-PLUS\n');
-    printer.addText('Small GG\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('JM-PLUS\n');
+    // printer.addText('Small GG\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('Jason Lai 小雞雞\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('小雞雞\n');
+    // printer.addText('小雞雞\n');
+
+
     callback();
 }
 
