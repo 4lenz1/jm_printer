@@ -32,7 +32,7 @@ function connect() {
     console.log('connect called');
     var ipAddress = '192.168.0.161';
     var port = '8043';
-    ePosDev.connect(ipAddress, port, callback_connect)
+    ePosDev.connect(ipAddress, port, callback_connect);
 
 
 }
@@ -40,7 +40,7 @@ function connect() {
 async function callback_connect(resultConnect) {
     console.log('callback_connect called');
     var deviceId = 'local_printer';
-    var options = { 'crypto': false, 'buffer': false };
+    var options = { 'crypto': true, 'buffer': true };
     if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
         console.log('connected');
         //Retrieves the Printer object
@@ -63,20 +63,17 @@ function callback_createDevice(deviceObj, errorCode) {
     }
     printer = deviceObj;
     console.log('print obj', deviceObj);
-    createData(()=>{
+    createData(() => {
         send();
     });
     //Registers the print complete event
     printer.onreceive = function (response) {
         if (response.success) {
-
             //Displays the successful print message
-
-
             console.log('print success');
         }
         else {
-            console.error('error');
+            console.error('print not scuuess');
             //Displays error messages
         }
     };
@@ -90,7 +87,21 @@ function createData(callback) {
     printer.addText('JM-PLUS\n');
 
     printer.addText('JM-PLUS\n');
-
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
+    printer.addText('JM-PLUS\n');
     printer.addText('JM-PLUS\n');
     printer.addText('JM-PLUS\n');
     printer.addText('JM-PLUS\n');
@@ -101,7 +112,7 @@ function createData(callback) {
 function send() {
     console.log('send called');
     if (ePosDev.isConnected) {
-        console.log('ePosDev.isConnected');
+        console.log('ePosDev.isConnected , now printing');
         printer.send();
     } else {
         console.warn('ePosDev.is not connected');
