@@ -32,10 +32,12 @@ function connect() {
     console.log('connect called');
     var ipAddress = '192.168.0.161';
     var port = '8043';
-    ePosDev.connect(ipAddress, port, callback_connect);
+    ePosDev.connect(ipAddress, port, callback_connect)
+
+
 }
 
-function callback_connect(resultConnect) {
+async function callback_connect(resultConnect) {
     console.log('callback_connect called');
     var deviceId = 'local_printer';
     var options = { 'crypto': false, 'buffer': false };
@@ -55,15 +57,21 @@ var printer = null;
 function callback_createDevice(deviceObj, errorCode) {
     if (deviceObj === null) {
         console.log(errorCode);
-        console.log('deviceObj is null , failed ' , errorCode);
+        console.log('deviceObj is null , failed ', errorCode);
         //Displays an error message if the system fails to retrieve the Printer object
         return;
     }
     printer = deviceObj;
+    console.log('print obj', deviceObj);
+    createData();
+    send();
     //Registers the print complete event
     printer.onreceive = function (response) {
         if (response.success) {
+
             //Displays the successful print message
+            
+           
             console.log('print success');
         }
         else {
@@ -94,6 +102,8 @@ function send() {
     if (ePosDev.isConnected) {
         console.log('ePosDev.isConnected');
         printer.send();
+    } else {
+        console.warn('ePosDev.is not connected');
     }
 }
 
